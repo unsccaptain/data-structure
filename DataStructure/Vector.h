@@ -77,19 +77,26 @@ namespace adt {
 		}
 
 		/// @brief:放入对象或字面量
-		void push_back(const Ty& ele) {
+		void push_back(const Ty& Element) {
 			if (this->size() >= this->capacity())
 				grow();
-			::new (this->end()) Ty(ele);
+			::new (this->end()) Ty(Element);
 			this->size_++;
 		}
 
 		/// @brief:放入临时变量
-		void push_back(Ty&& ele) {
+		void push_back(Ty&& Element) {
 			if (this->size() >= this->capacity())
 				grow();
-			::new (this->end()) Ty(std::move(ele));
+			::new (this->end()) Ty(std::move(Element));
 			this->size_++;
+		}
+
+		template<typename... ValTy>
+		void emplace_back(ValTy&&... Value) {
+			if (this->size() >= this->capacity())
+				grow();
+			::new (this->end()) Ty(std::forward<ValTy>(Value)...);
 		}
 
 		/// @brief:取出变量
@@ -144,6 +151,11 @@ namespace adt {
 		using al_ = AllocatorTy;
 
 	public:
+		explicit Vector() {
+			this->data_ = (Ty*)al_::Allocate(16 * sizeof(Ty));
+			this->capacity_ = 16;
+		}
+
 		explicit Vector(size_t InitSize) {
 			this->data_ = (Ty*)al_::Allocate(InitSize * sizeof(Ty));
 			this->size_ = this->capacity_ = InitSize;

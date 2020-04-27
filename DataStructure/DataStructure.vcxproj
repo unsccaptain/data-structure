@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Allocator.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="Slice.h" />
     <ClInclude Include="SortAlgo.h" />
     <ClInclude Include="Stack.h" />

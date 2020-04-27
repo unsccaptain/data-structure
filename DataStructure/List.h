@@ -21,6 +21,11 @@ namespace adt {
 			:Value(std::move(Ele)) {
 		}
 
+		template<typename... ValTy>
+		explicit ListNode(ValTy&&... V)
+			:Value(std::forward<ValTy>(V)...) {
+		}
+
 		~ListNode() = default;
 	};
 
@@ -114,12 +119,12 @@ namespace adt {
 			head_.Next = head_.Prev = &head_;
 		}
 
-		explicit List(const Ty& Element)
+		explicit List(const_reference Element)
 			:head_(Ty()) {
 			head_.Next = head_.Prev = &head_;
 		}
 
-		void push_back(const Ty& Element) {
+		void push_back(const_reference Element) {
 			InsertTail(Element);
 			++size_;
 		}
@@ -129,7 +134,13 @@ namespace adt {
 			++size_;
 		}
 
-		void push_front(const Ty& Element) {
+		template<typename... ValTy>
+		void emplace_back(ValTy&&... Element) {
+			InsertTail(std::forward<ValTy>(Element)...);
+			++size_;
+		}
+
+		void push_front(const_reference Element) {
 			InsertHead(Element);
 			++size_;
 		}
@@ -139,8 +150,34 @@ namespace adt {
 			++size_;
 		}
 
+		template<typename... ValTy>
+		void emplace_front(ValTy&&... Element) {
+			InsertHead(std::forward<ValTy>(Element)...);
+			++size_;
+		}
+
 		void pop_front() { RemoveHead(); --size_; }
 		void pop_back() { RemoveTail(); --size_; }
+		
+		reference front() {
+			assert(size_ > 0);
+			return head_.Next->Value;
+		}
+
+		const_reference front() const {
+			assert(size_ > 0);
+			return head_.Next->Value;
+		}
+
+		reference back() {
+			assert(size_ > 0);
+			return head_.Prev->Value;
+		}
+
+		const_reference back() const {
+			assert(size_ > 0);
+			return head_.Prev->Value;
+		}
 
 		iterator begin() {
 			assert(head_.Next != &head_);
@@ -169,7 +206,6 @@ namespace adt {
 		}
 
 		size_t size() const { return size_; }
-
 		bool empty() const { return size_ == 0; }
 
 		void resize(size_t NewSize) {
@@ -187,7 +223,7 @@ namespace adt {
 				}
 		}
 
-		void resize(size_t NewSize, const Ty& Element) {
+		void resize(size_t NewSize, const_reference Element) {
 			if (NewSize == size_)
 				return;
 			if (NewSize < size_)
@@ -204,18 +240,18 @@ namespace adt {
 
 	private:
 		/// @brief:创建一个新结点，自动完成构造
-		template<typename T>
-		node_ptr NewNode(T&& Element) {
+		template<typename... ValTy>
+		node_ptr NewNode(ValTy&&... Element) {
 			/// 编译器自己推导左值还是右值
 			node_ptr new_node = (node_ptr)al_::Allocate(sizeof(node));
-			::new (new_node) node(Element);
+			::new (new_node) node(std::forward<ValTy>(Element)...);
 			return new_node;
 		}
 
 		/// @brief:在链表尾部插入一个元素
-		template<typename T>
-		void InsertTail(T&& Element) {
-			node_ptr new_node = NewNode(Element);
+		template<typename... ValTy>
+		void InsertTail(ValTy&&... Element) {
+			node_ptr new_node = NewNode(std::forward<ValTy>(Element)...);
 			new_node->Next = &head_;
 			new_node->Prev = head_.Prev;
 			head_.Prev->Next = new_node;
@@ -223,9 +259,9 @@ namespace adt {
 		}
 
 		/// @breif:在链表头部插入一个元素
-		template<typename T>
-		void InsertHead(T&& Element) {
-			node_ptr new_node = NewNode(Element);
+		template<typename... ValTy>
+		void InsertHead(ValTy&&... Element) {
+			node_ptr new_node = NewNode(std::forward<ValTy>(Element)...);
 			new_node->Next = head_.Next;
 			new_node->Prev = &head_;
 			head_.Next->Prev = new_node;
@@ -234,20 +270,24 @@ namespace adt {
 
 		/// @brief:删除链表尾部的结点
 		void RemoveTail() {
-			node_ptr new_tail = head_.Prev->Prev;
+			node_ptr victim = head_.Prev;
+			node_ptr new_tail = victim->Prev;
 			new_tail->Next = &head_;
 			head_.Prev = new_tail;
-			new_tail->~ListNode();
-			al_::Deallocate(new_tail);
+
+			victim->~ListNode();
+			al_::Deallocate(victim);
 		}
 
 		/// @brief:删除链表头部的结点
 		void RemoveHead() {
-			node_ptr new_head = head_.Next->Next;
+			node_ptr victim = head_.Next;
+			node_ptr new_head = victim->Next;
 			new_head->Prev = &head_;
 			head_.Next = new_head;
-			new_head->~ListNode();
-			al_::Deallocate(new_head);
+			
+			victim->~ListNode();
+			al_::Deallocate(victim);
 		}
 
 	private:
