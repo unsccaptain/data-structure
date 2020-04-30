@@ -25,13 +25,8 @@ namespace adt {
 		using al_ = AllocatorTy;
 
 	public:
-		Stack()
-			:container_() {
-		}
-
-		Stack(size_t InitSize)
-			:container_(InitSize) {
-		}
+		Stack() :container_() {}
+		Stack(size_t InitSize) :container_(InitSize) {}
 
 		void push(Ty&& Element) { container_.push_back(Element); }
 		void push(const Ty& Element) { container_.push_back(Element); }

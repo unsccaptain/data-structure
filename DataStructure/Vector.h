@@ -41,7 +41,7 @@ namespace adt {
 		iterator begin() { return data_; }
 		iterator end() { return data_ + size_; }
 		const_iterator begin() const { return (const_iterator)data_; }
-		const_iterator end() const { return (const_iterator)data_ + size; }
+		const_iterator end() const { return (const_iterator)data_ + size(); }
 
 		reference operator[](size_t Idx) {
 			assert(Idx < size_);
@@ -70,8 +70,12 @@ namespace adt {
 		}
 
 		/// @brief:移出It处的元素
-		iterator erase(const_iterator It) {
-			std::move(It + 1, this->end(), It);
+		iterator erase(iterator It) {
+			iterator it = It;
+			for (iterator iter = It + 1;iter != this->end();++iter, ++it) {
+				std::destroy_at(it);
+				::new (std::addressof(*it)) Ty(std::move(*iter));
+			}
 			pop_back();
 			return const_cast<iterator>(It);
 		}
@@ -81,7 +85,7 @@ namespace adt {
 			if (this->size() >= this->capacity())
 				grow();
 			::new (this->end()) Ty(Element);
-			this->size_++;
+			++this->size_;
 		}
 
 		/// @brief:放入临时变量
@@ -89,7 +93,7 @@ namespace adt {
 			if (this->size() >= this->capacity())
 				grow();
 			::new (this->end()) Ty(std::move(Element));
-			this->size_++;
+			++this->size_;
 		}
 
 		template<typename... ValTy>
@@ -97,11 +101,12 @@ namespace adt {
 			if (this->size() >= this->capacity())
 				grow();
 			::new (this->end()) Ty(std::forward<ValTy>(Value)...);
+			this->size_++;
 		}
 
 		/// @brief:取出变量
 		void pop_back() {
-			this->size_--;
+			++this->size_;
 			std::destroy_at(this->end());
 		}
 
@@ -136,6 +141,34 @@ namespace adt {
 			this->append(InitList.begin(), InitList.end());
 		}
 
+		/// @brief:调整容器大小
+		void resize(size_t NewSize, const Ty& Val) {
+			int diff = NewSize - size_;
+			if (diff == 0) return;
+			else if (diff > 0) {
+				this->grow(NewSize);
+				std::uninitialized_fill_n(end(), diff, Val);
+				size_ = NewSize;
+			}
+			else {
+				std::destroy(begin() + NewSize, begin() + size());
+				size_ = NewSize;
+			}
+		}
+
+		/// @brief:调整容器大小
+		void resize(size_t NewSize) {
+			resize(NewSize, Ty());
+		}
+
+		void dump() {
+			std::cout << "[";
+			for (iterator it = begin();it != end();++it) {
+				std::cout << *it << ",";
+			}
+			std::cout << "]" << std::endl;
+		}
+
 	protected:
 		virtual void grow(size_t Size = 0) = 0;
 
@@ -164,7 +197,7 @@ namespace adt {
 			std::uninitialized_fill(this->begin(), this->end(), temp);
 		}
 
-		explicit Vector(size_t InitSize, const Ty& Init){
+		explicit Vector(size_t InitSize, const Ty& Init) {
 			this->data_ = (Ty*)al_::Allocate(InitSize * sizeof(Ty));
 			this->size_ = this->capacity_ = InitSize;
 			std::uninitialized_fill(this->begin(), this->end(), Init);
@@ -176,14 +209,14 @@ namespace adt {
 			std::uninitialized_copy(InitList.begin(), InitList.end(), this->begin());
 		}
 
-		explicit Vector(Vector& Another) {
-			this->size_ = Another->size_();
-			this->capacity_ = Another->capacity();
+		explicit Vector(const Vector& Another) {
+			this->size_ = Another.size();
+			this->capacity_ = Another.capacity();
 			this->data_ = (Ty*)al_::Allocate(this->capacity_ * sizeof(Ty));
 			std::uninitialized_copy(Another.begin(), Another.end(), this->begin());
 		}
 
-		explicit Vector(Vector&& Another){
+		explicit Vector(Vector&& Another) {
 			this->data_ = Another.data();
 			this->size_ = Another.size();
 			this->capacity_ = Another.capacity();
@@ -213,6 +246,7 @@ namespace adt {
 		/// @brief:扩展线性空间
 		virtual void grow(size_t Size) {
 			size_t new_cap = Size;
+			if (this->capacity_ > Size) return;
 			if (Size == 0)
 				new_cap = this->size_ < 512 ? this->size_ * 2 : this->size_ + 64;
 			else

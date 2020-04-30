@@ -44,5 +44,14 @@
     <ClInclude Include="SortAlgo.h">
       <Filter>Algorithm</Filter>
     </ClInclude>
+    <ClInclude Include="DenseHash.h">
+      <Filter>Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTrait.h">
+      <Filter>Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="UnorderedSet.h">
+      <Filter>Structure</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

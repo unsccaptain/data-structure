@@ -91,6 +91,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,11 +153,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Allocator.h" />
+    <ClInclude Include="DenseHash.h" />
+    <ClInclude Include="HashTrait.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Slice.h" />
     <ClInclude Include="SortAlgo.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="UnorderedSet.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
