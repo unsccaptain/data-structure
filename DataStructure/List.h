@@ -9,8 +9,8 @@
 namespace adt {
 
 template <typename Ty> struct ListNode {
-  ListNode *Prev;
-  ListNode *Next;
+  ListNode *Prev = nullptr;
+  ListNode *Next = nullptr;
   Ty Value;
 
   explicit ListNode(const Ty &Ele) : Value(Ele) {}

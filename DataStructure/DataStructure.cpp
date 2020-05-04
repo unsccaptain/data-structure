@@ -1,16 +1,19 @@
 ﻿// DataStructure.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
+#include "BST.h"
 #include "List.h"
 #include "Queue.h"
 #include "SortAlgo.h"
 #include "Stack.h"
 #include "UnorderedSet.h"
 #include "Vector.h"
+#include "Set.h"
 #include <algorithm>
 #include <iostream>
 #include <list>
 #include <queue>
+#include <set>
 #include <stack>
 #include <unordered_set>
 
@@ -152,6 +155,43 @@ int main() {
   std::list<int> k;
   test_vector();
   test_list();
+
+  adt::Set<int> avl;
+  avl.insert(5);
+  avl.insert(1);
+  avl.insert(2);
+  avl.insert(4);
+  avl.insert(43);
+  avl.insert(66);
+  avl.insert(3);
+  avl.insert(55);
+
+  auto it = avl.lower_bound(5);
+
+  for (adt::BSTAvlImpl<int>::iterator iter = avl.begin(); iter != avl.end();
+       ++iter)
+    std::cout << *iter << std::endl;
+
+  avl.erase(5);
+  for (adt::BSTAvlImpl<int>::iterator iter = avl.begin(); iter != avl.end();
+       ++iter)
+    std::cout << *iter << std::endl;
+
+  avl.erase(66);
+  for (adt::BSTAvlImpl<int>::iterator iter = avl.begin(); iter != avl.end();
+       ++iter)
+    std::cout << *iter << std::endl;
+
+  avl.erase(3);
+  for (adt::BSTAvlImpl<int>::iterator iter = avl.begin(); iter != avl.end();
+       ++iter)
+    std::cout << *iter << std::endl;
+
+  avl.erase(avl.begin());
+
+  adt::Set<int> avl2 = adt::Set<int>(avl);
+
+  adt::Set<int> avl3 = adt::Set<int>(std::move(avl));
 
   std::cout << "Hello World!\n";
 }

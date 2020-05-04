@@ -53,5 +53,18 @@
     <ClInclude Include="UnorderedSet.h">
       <Filter>Structure</Filter>
     </ClInclude>
+    <ClInclude Include="BST.h">
+      <Filter>Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeIterator.h">
+      <Filter>Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Set.h">
+      <Filter>Structure</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\DS.code-workspace" />
+    <None Include="..\readme.md" />
   </ItemGroup>
 </Project>

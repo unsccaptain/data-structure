@@ -4,14 +4,14 @@
 
 namespace adt {
 
-/// @brief:Ωªªª
+/// @brief Ωªªª
 template <class Ty> static void Swap(Ty &a, Ty &b) {
   Ty temp = std::move(a);
   a = std::move(b);
   b = std::move(temp);
 }
 
-/// @brief:√∞≈›≈≈–Ú
+/// @brief √∞≈›≈≈–Ú
 template <class Iterator>
 static void BubbleSortor(Iterator First, Iterator Last) {
   bool changed;
@@ -32,7 +32,7 @@ static void BubbleSortor(Iterator First, Iterator Last) {
   }
 }
 
-// @brief:—°‘Ò≈≈–Ú
+// @brief —°‘Ò≈≈–Ú
 template <class Iterator>
 static void SelectorSortor(Iterator First, Iterator Last) {
   for (Iterator iter = First; iter != Last; ++iter) {

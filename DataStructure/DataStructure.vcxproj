@@ -153,15 +153,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Allocator.h" />
+    <ClInclude Include="BST.h" />
     <ClInclude Include="DenseHash.h" />
     <ClInclude Include="HashTrait.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="Set.h" />
     <ClInclude Include="Slice.h" />
     <ClInclude Include="SortAlgo.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="TreeIterator.h" />
     <ClInclude Include="UnorderedSet.h" />
     <ClInclude Include="Vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\DS.code-workspace" />
+    <None Include="..\readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

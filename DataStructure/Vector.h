@@ -15,6 +15,7 @@
 #include <assert.h>
 #include <initializer_list>
 #include <memory>
+#include <iostream>
 
 namespace adt {
 
