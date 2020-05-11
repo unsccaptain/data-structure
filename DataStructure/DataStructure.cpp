@@ -4,11 +4,11 @@
 #include "BST.h"
 #include "List.h"
 #include "Queue.h"
+#include "Set.h"
 #include "SortAlgo.h"
 #include "Stack.h"
 #include "UnorderedSet.h"
 #include "Vector.h"
-#include "Set.h"
 #include <algorithm>
 #include <iostream>
 #include <list>
@@ -150,11 +150,69 @@ void test_list() {
   v3.dump();
 }
 
+void test_priority_queue() {
+  adt::PriorityQueue<int> pq;
+  cout << "push 5" << endl;
+  pq.push(5);
+  cout << "top:" << pq.top() << endl;
+
+  cout << "push 1" << endl;
+  pq.push(1);
+  cout << "top:" << pq.top() << endl;
+
+  cout << "push 9" << endl;
+  pq.push(9);
+  cout << "top:" << pq.top() << endl;
+
+  cout << "push 4" << endl;
+  pq.push(4);
+  cout << "top:" << pq.top() << endl;
+
+  cout << "push 15" << endl;
+  pq.push(15);
+  cout << "top:" << pq.top() << endl;
+
+  cout << "push 22" << endl;
+  pq.push(22);
+  cout << "top:" << pq.top() << endl;
+
+  cout << "push 25" << endl;
+  pq.push(25);
+  cout << "top:" << pq.top() << endl;
+
+  cout << "pop" << endl;
+  pq.pop();
+  cout << "top:" << pq.top() << endl;
+
+  cout << "pop" << endl;
+  pq.pop();
+  cout << "top:" << pq.top() << endl;
+
+  cout << "pop" << endl;
+  pq.pop();
+  cout << "top:" << pq.top() << endl;
+
+  cout << "pop" << endl;
+  pq.pop();
+  cout << "top:" << pq.top() << endl;
+
+  cout << "pop" << endl;
+  pq.pop();
+  cout << "top:" << pq.top() << endl;
+
+  cout << "pop" << endl;
+  pq.pop();
+  cout << "top:" << pq.top() << endl;
+}
+
 int main() {
 
+  std::priority_queue<int> zz;
+  std::vector<int> aa;
   std::list<int> k;
   test_vector();
   test_list();
+  test_priority_queue();
 
   adt::Set<int> avl;
   avl.insert(5);

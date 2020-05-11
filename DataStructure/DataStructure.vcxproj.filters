@@ -62,6 +62,9 @@
     <ClInclude Include="Set.h">
       <Filter>Structure</Filter>
     </ClInclude>
+    <ClInclude Include="Basis.h">
+      <Filter>Algorithm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\DS.code-workspace" />

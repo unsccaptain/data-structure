@@ -7,6 +7,7 @@
 |链表|List.h|双向环形链表|
 |栈|Stack.h|基于Vector|
 |队列|Queue.h|基于List|
+|优先队列|Queue.h|基于Vector|
 |密集散列|DenseHash.h|二次探测法|
 |无序集合|UnorderedSet.h|基于DenseHash|
 |AVL树|BST.h||

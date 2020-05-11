@@ -14,8 +14,8 @@
 #include "Allocator.h"
 #include <assert.h>
 #include <initializer_list>
-#include <memory>
 #include <iostream>
+#include <memory>
 
 namespace adt {
 
@@ -105,7 +105,7 @@ public:
 
   /// @brief:取出变量
   void pop_back() {
-    ++this->size_;
+    --this->size_;
     std::destroy_at(this->end());
   }
 
@@ -152,6 +152,8 @@ public:
       size_ = NewSize;
     }
   }
+
+  void reserve(size_t NewCapacity) { this->grow(NewCapacity); }
 
   /// @brief:调整容器大小
   void resize(size_t NewSize) { resize(NewSize, Ty()); }

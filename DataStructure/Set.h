@@ -26,8 +26,8 @@ public:
     }
   }
 
-  Set(Set &&Another) : BSTAvlImpl<Ty, AllocatorTy>(std::move(Another)) {}
-
+  Set(Set &&Another) noexcept
+      : BSTAvlImpl<Ty, AllocatorTy>(std::move(Another)) {}
 };
 
 } // namespace adt

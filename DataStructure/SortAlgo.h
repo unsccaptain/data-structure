@@ -1,15 +1,8 @@
 #pragma once
 
-#include <memory>
+#include "Basis.h"
 
 namespace adt {
-
-/// @brief Ωªªª
-template <class Ty> static void Swap(Ty &a, Ty &b) {
-  Ty temp = std::move(a);
-  a = std::move(b);
-  b = std::move(temp);
-}
 
 /// @brief √∞≈›≈≈–Ú
 template <class Iterator>
