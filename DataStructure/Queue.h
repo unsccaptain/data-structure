@@ -19,7 +19,7 @@ public:
   Queue() {}
 
   Queue(const Queue &Another) {
-    using Iterator = List<Ty, al_>::iterator;
+    using Iterator = typename List<Ty, al_>::iterator;
     for (Iterator it = Another.container_.begin();
          it != Another.container_.end(); ++it) {
       push(*it);
@@ -27,6 +27,11 @@ public:
   }
 
   Queue(Queue &&Another) { container_ = std::move(Another.container_); }
+
+  Queue(std::initializer_list<Ty> list) {
+    for (auto it = list.begin(); it != list.end(); ++it)
+      emplace(*it);
+  }
 
   template <typename Iterator> Queue(Iterator First, Iterator Last) {
     for (Iterator it = First; it != Last; ++it) {
@@ -96,6 +101,17 @@ public:
   PriorityQueue(PriorityQueue &&Another) {
     container_ = std::move(Another.container_);
     less_ = Another.less_;
+  }
+
+  PriorityQueue(std::initializer_list<Ty> list, const value_compare &Pred)
+      : less_(Pred) {
+    for (auto it = list.begin(); it != list.end(); ++it)
+      emplace(*it);
+  }
+
+  PriorityQueue(std::initializer_list<Ty> list) : less_(value_compare()) {
+    for (auto it = list.begin(); it != list.end(); ++it)
+      emplace(*it);
   }
 
   void push(const Ty &Element) {

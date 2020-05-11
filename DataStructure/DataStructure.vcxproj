@@ -156,6 +156,7 @@
     <ClInclude Include="Basis.h" />
     <ClInclude Include="BST.h" />
     <ClInclude Include="DenseHash.h" />
+    <ClInclude Include="DirectGraphIterator.h" />
     <ClInclude Include="HashTrait.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Queue.h" />

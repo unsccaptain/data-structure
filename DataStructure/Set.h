@@ -28,6 +28,11 @@ public:
 
   Set(Set &&Another) noexcept
       : BSTAvlImpl<Ty, AllocatorTy>(std::move(Another)) {}
+
+  Set(std::initializer_list<Ty> list) {
+    for (auto it = list.begin(); it != list.end(); ++it)
+      insert(*it);
+  }
 };
 
 } // namespace adt

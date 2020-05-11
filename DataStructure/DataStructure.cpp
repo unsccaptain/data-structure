@@ -205,6 +205,58 @@ void test_priority_queue() {
   cout << "top:" << pq.top() << endl;
 }
 
+void dump_set(adt::Set<int> &set) {
+  std::cout << "<";
+  for (adt::Set<int>::iterator iter = set.begin(); iter != set.end(); ++iter)
+    std::cout << *iter << ",";
+  std::cout << ">" << std::endl;
+}
+
+void test_set() {
+  adt::Set<int> avl;
+
+  std::cout << "insert 5" << std::endl;
+  avl.insert(5);
+  dump_set(avl);
+
+  std::cout << "insert 1" << std::endl;
+  avl.insert(1);
+  dump_set(avl);
+
+  std::cout << "insert 2" << std::endl;
+  avl.insert(2);
+  dump_set(avl);
+
+  std::cout << "insert 4" << std::endl;
+  avl.insert(4);
+  dump_set(avl);
+
+  std::cout << "insert 43" << std::endl;
+  avl.insert(43);
+  dump_set(avl);
+
+  std::cout << "insert 66" << std::endl;
+  avl.insert(66);
+  dump_set(avl);
+
+  std::cout << "insert 3" << std::endl;
+  avl.insert(3);
+  dump_set(avl);
+
+  auto it = avl.lower_bound(9);
+  std::cout << "lower bound 9 is " << *it << std::endl;
+
+  it = avl.lower_bound(4);
+  std::cout << "lower bound 4 is " << *it << std::endl;
+
+  it = avl.upper_bound(4);
+  std::cout << "upper bound 4 is " << *it << std::endl;
+
+  adt::Set<int> avl2 = adt::Set<int>(avl);
+
+  adt::Set<int> avl3 = adt::Set<int>(std::move(avl));
+}
+
 int main() {
 
   std::priority_queue<int> zz;
@@ -213,43 +265,7 @@ int main() {
   test_vector();
   test_list();
   test_priority_queue();
-
-  adt::Set<int> avl;
-  avl.insert(5);
-  avl.insert(1);
-  avl.insert(2);
-  avl.insert(4);
-  avl.insert(43);
-  avl.insert(66);
-  avl.insert(3);
-  avl.insert(55);
-
-  auto it = avl.lower_bound(5);
-
-  for (adt::BSTAvlImpl<int>::iterator iter = avl.begin(); iter != avl.end();
-       ++iter)
-    std::cout << *iter << std::endl;
-
-  avl.erase(5);
-  for (adt::BSTAvlImpl<int>::iterator iter = avl.begin(); iter != avl.end();
-       ++iter)
-    std::cout << *iter << std::endl;
-
-  avl.erase(66);
-  for (adt::BSTAvlImpl<int>::iterator iter = avl.begin(); iter != avl.end();
-       ++iter)
-    std::cout << *iter << std::endl;
-
-  avl.erase(3);
-  for (adt::BSTAvlImpl<int>::iterator iter = avl.begin(); iter != avl.end();
-       ++iter)
-    std::cout << *iter << std::endl;
-
-  avl.erase(avl.begin());
-
-  adt::Set<int> avl2 = adt::Set<int>(avl);
-
-  adt::Set<int> avl3 = adt::Set<int>(std::move(avl));
+  test_set();
 
   std::cout << "Hello World!\n";
 }

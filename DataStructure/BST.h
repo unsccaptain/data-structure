@@ -2,6 +2,7 @@
 
 #include "TreeIterator.h"
 #include "Vector.h"
+#include "Basis.h"
 #include <algorithm>
 
 namespace adt {
@@ -88,6 +89,7 @@ public:
   using node_ptr = AvlTreeNode<Ty> *;
   using iterator = TreeInOrderIterator<node_type, false>;
   using const_iterator = TreeInOrderIterator<node_type, true>;
+  using value_compare = Less<Ty>;
 
   using al_ = AllocatorTy;
 
@@ -399,6 +401,7 @@ private:
 private:
   node_ptr root_;
   size_t size_;
+  value_compare less_;
 };
 
 } // namespace adt

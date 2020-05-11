@@ -56,13 +56,16 @@
     <ClInclude Include="BST.h">
       <Filter>Structure</Filter>
     </ClInclude>
-    <ClInclude Include="TreeIterator.h">
-      <Filter>Structure</Filter>
-    </ClInclude>
     <ClInclude Include="Set.h">
       <Filter>Structure</Filter>
     </ClInclude>
     <ClInclude Include="Basis.h">
+      <Filter>Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeIterator.h">
+      <Filter>Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectGraphIterator.h">
       <Filter>Algorithm</Filter>
     </ClInclude>
   </ItemGroup>
