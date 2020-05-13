@@ -161,6 +161,7 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Set.h" />
+    <ClInclude Include="SkipList.h" />
     <ClInclude Include="Slice.h" />
     <ClInclude Include="SortAlgo.h" />
     <ClInclude Include="Stack.h" />

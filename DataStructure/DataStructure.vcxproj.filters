@@ -68,6 +68,9 @@
     <ClInclude Include="DirectGraphIterator.h">
       <Filter>Algorithm</Filter>
     </ClInclude>
+    <ClInclude Include="SkipList.h">
+      <Filter>Structure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\DS.code-workspace" />

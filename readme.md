@@ -5,6 +5,7 @@
 |-|-|-|
 |向量|Vector.h||
 |链表|List.h|双向环形链表|
+|跳跃表|SkipList.h||
 |栈|Stack.h|基于Vector|
 |队列|Queue.h|基于List|
 |优先队列|Queue.h|基于Vector|

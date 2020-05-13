@@ -5,6 +5,7 @@
 #include "List.h"
 #include "Queue.h"
 #include "Set.h"
+#include "SkipList.h"
 #include "SortAlgo.h"
 #include "Stack.h"
 #include "UnorderedSet.h"
@@ -257,6 +258,13 @@ void test_set() {
   adt::Set<int> avl3 = adt::Set<int>(std::move(avl));
 }
 
+void dump_skip_list(adt::SkipList<int> &sl) {
+  std::cout << "<";
+  for (adt::SkipList<int>::iterator iter = sl.begin(); iter != sl.end(); ++iter)
+    std::cout << *iter << ",";
+  std::cout << ">" << std::endl;
+}
+
 int main() {
 
   std::priority_queue<int> zz;
@@ -266,6 +274,49 @@ int main() {
   test_list();
   test_priority_queue();
   test_set();
+
+  adt::SkipList<int> sl;
+  int i = 10000;
+  std::random_device rd;
+  while (i-- > 0) {
+    sl.push(rd());
+  }
+
+  sl.clear();
+
+  sl.push(4);
+  dump_skip_list(sl);
+
+  sl.push(1);
+  dump_skip_list(sl);
+
+  sl.push(9);
+  dump_skip_list(sl);
+
+  sl.push(6);
+  dump_skip_list(sl);
+
+  sl.push(17);
+  dump_skip_list(sl);
+
+  sl.push(12);
+  dump_skip_list(sl);
+
+  auto it = sl.upper_bound(9);
+
+  it = sl.lower_bound(9);
+
+  sl.remove(it);
+  dump_skip_list(sl);
+
+  sl.remove(9);
+  dump_skip_list(sl);
+
+  sl.remove(12);
+  dump_skip_list(sl);
+
+  sl.push(8);
+  dump_skip_list(sl);
 
   std::cout << "Hello World!\n";
 }
