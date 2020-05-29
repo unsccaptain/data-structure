@@ -8,7 +8,9 @@
 #include "SkipList.h"
 #include "SortAlgo.h"
 #include "Stack.h"
+#include "UnionFind.h"
 #include "UnorderedSet.h"
+#include "UnorderdMap.h"
 #include "Vector.h"
 #include <algorithm>
 #include <iostream>
@@ -17,6 +19,7 @@
 #include <set>
 #include <stack>
 #include <unordered_set>
+#include <unordered_map>
 
 using namespace std;
 
@@ -265,15 +268,63 @@ void dump_skip_list(adt::SkipList<int> &sl) {
   std::cout << ">" << std::endl;
 }
 
+void test_unionfind() {
+  adt::UnionFind<int> uf;
+  uf.union2(2, 5);
+  std::cout << "root(2)=" << uf.find(2);
+  std::cout << ";root(5)=" << uf.find(5) << std::endl;
+
+  uf.union2(5, 4);
+  std::cout << "root(5)=" << uf.find(5);
+  std::cout << ";root(4)=" << uf.find(4) << std::endl;
+
+  uf.union2(6, 9);
+  std::cout << "root(6)=" << uf.find(6);
+  std::cout << ";root(9)=" << uf.find(9) << std::endl;
+
+  uf.union2(12, 15);
+  std::cout << "root(12)=" << uf.find(12);
+  std::cout << ";root(15)=" << uf.find(15) << std::endl;
+
+  uf.union2(2, 17);
+  std::cout << "root(2)=" << uf.find(2);
+  std::cout << ";root(17)=" << uf.find(17) << std::endl;
+
+  uf.union2(9, 21);
+  std::cout << "root(9)=" << uf.find(9);
+  std::cout << ";root(21)=" << uf.find(21) << std::endl;
+
+  uf.union2(6, 24);
+  std::cout << "root(6)=" << uf.find(6);
+  std::cout << ";root(24)=" << uf.find(24) << std::endl;
+
+  uf.union2(24, 27);
+  std::cout << "root(24)=" << uf.find(24);
+  std::cout << ";root(27)=" << uf.find(27) << std::endl;
+
+  uf.union2(2, 9);
+  std::cout << "root(2)=" << uf.find(2);
+  std::cout << ";root(9)=" << uf.find(9) << std::endl;
+
+  uf.find(2, 9);
+}
+
+void test_unordered_map() {
+  adt::UnorderedMap<int, int> um;
+  um[2] = 5;
+  um.find(5);
+}
+
 int main() {
 
   std::priority_queue<int> zz;
   std::vector<int> aa;
   std::list<int> k;
-  test_vector();
-  test_list();
+  std::stack<int> st = std::stack<int>();
+  std::unordered_map<int, int> um;
   test_priority_queue();
   test_set();
+  test_unionfind();
 
   adt::SkipList<int> sl;
   int i = 10000;

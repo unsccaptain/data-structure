@@ -27,6 +27,15 @@ public:
   Stack() : container_() {}
   Stack(size_t InitSize) : container_(InitSize) {}
 
+  Stack(const Stack &Another) {
+    for (auto iter = Another.container_.begin();
+         iter != Another.container_.end(); ++iter) {
+      push(*iter);
+    }
+  }
+
+  Stack(Stack &&Another) { container_ = std::move(Another.container_); }
+
   void push(Ty &&Element) { container_.push_back(Element); }
   void push(const Ty &Element) { container_.push_back(Element); }
   void pop() { container_.pop_back(); }

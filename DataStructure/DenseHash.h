@@ -172,7 +172,7 @@ public:
   }
 
   iterator find(const keyTy &Key) {
-    HashEntry *place = LookupHashEntry(Key);
+    entry *place = LookupHashEntry(Key);
     if (place->IsDead || place->IsEmpty)
       return end();
     return iterator(place, BucketBegin(), BucketEnd());
@@ -197,9 +197,11 @@ public:
   }
 
   void rehash() { Grow(GetNumBuckets()); }
+  void reserve(size_t MaxCount) { Grow(MaxCount); }
 
   size_t bucket_count() const { return num_buckets_; }
   size_t bucket_size() const { return num_entries_; }
+  size_t max_size() const { return num_entries_; }
   bool empty() const { return num_entries_ == 0; }
   size_t count() const { return num_entries_; }
   size_t size() const { return count(); }

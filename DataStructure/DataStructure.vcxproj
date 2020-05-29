@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DataStructure.cpp" />
+    <ClCompile Include="TernaryTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Allocator.h" />
@@ -165,7 +166,10 @@
     <ClInclude Include="Slice.h" />
     <ClInclude Include="SortAlgo.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="TernaryTree.h" />
     <ClInclude Include="TreeIterator.h" />
+    <ClInclude Include="UnionFind.h" />
+    <ClInclude Include="UnorderdMap.h" />
     <ClInclude Include="UnorderedSet.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>

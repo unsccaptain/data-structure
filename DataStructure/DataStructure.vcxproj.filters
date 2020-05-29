@@ -21,6 +21,9 @@
     <ClCompile Include="DataStructure.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="TernaryTree.cpp">
+      <Filter>Structure</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Allocator.h">
@@ -69,6 +72,15 @@
       <Filter>Algorithm</Filter>
     </ClInclude>
     <ClInclude Include="SkipList.h">
+      <Filter>Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="UnionFind.h">
+      <Filter>Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="TernaryTree.h">
+      <Filter>Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="UnorderdMap.h">
       <Filter>Structure</Filter>
     </ClInclude>
   </ItemGroup>

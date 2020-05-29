@@ -11,8 +11,11 @@
 |优先队列|Queue.h|基于Vector|
 |密集散列|DenseHash.h|二次探测法|
 |无序集合|UnorderedSet.h|基于DenseHash|
+|无序映射|UnorderedMap.h|基于DenseHash|
 |AVL树|BST.h||
 |有序集合|Set.h|基于AVL|
+|并查集|UnionFind.h||
+|三叉树|Ternary.h||
 ### 算法
 |名称|文件||
 |-|-|-|

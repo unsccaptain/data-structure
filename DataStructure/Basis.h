@@ -18,4 +18,9 @@ template <class _Ty> struct Less {
   }
 };
 
+/// @brief ªÒ»°ID
+template <class _Ty> struct Identify {
+  constexpr size_t operator()(const _Ty &_A) const { return static_cast<size_t>(_A); }
+};
+
 } // namespace adt
